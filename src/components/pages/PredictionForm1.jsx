@@ -68,10 +68,10 @@ export function PredictionForm1() {
 
   return (
     <>
-      <div className="h-[130vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
+      <div className="h-[103vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
         <div className="p-5">
           <NavigationbarWithDropdownMultilevelMenu />
-          <div className="h-[80vh] flex justify-center items-center mt-20">
+          <div className="h-[80vh] flex justify-center items-center mt-10">
             <Card className="bg-white text-black p-5" color="transparent" shadow={false}>
               <Typography variant="h4" color="blue-gray">Predict Winner Before Match</Typography>
               <Typography color="gray" className="mt-1 font-normal">
@@ -153,7 +153,7 @@ export function PredictionForm1() {
             </Card>
           </div>
         </div>
-        <footer className='ml-5 mr-5 mt-20'>
+        <footer className='ml-5 mr-5'>
           <SimpleFooter />
         </footer>
       </div>

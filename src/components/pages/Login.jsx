@@ -14,7 +14,7 @@ export function Login() {
   };
 
   return (
-    <div className="h-[120vh] w-full bg-gradient-to-b from-black to-blue-gray-900 flex flex-col justify-around items-center">
+    <div className="h-[100vh] w-full bg-gradient-to-b from-black to-blue-gray-900 flex flex-col justify-around items-center">
       <CoverText />
       <div className="bg-gradient-to-b from-blue-gray-900 to-black p-11 rounded-lg">
         {isSignup ? (

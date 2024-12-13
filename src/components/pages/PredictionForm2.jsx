@@ -76,7 +76,7 @@ export function PredictionForm2() {
   const tossWinnerEnabled = teamASelected && formValues.teamB !== "";
 
   return (
-    <div className="h-[150vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
+    <div className="h-[111vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
       <div className='p-5'>
         <NavigationbarWithDropdownMultilevelMenu />
         <div className='flex justify-center items-center mt-20'>

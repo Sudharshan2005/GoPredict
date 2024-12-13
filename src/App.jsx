@@ -17,7 +17,6 @@ function App() {
     <BrowserRouter>
       <div className=" w-full bg-gradient-to-b from-black to-blue-gray-900">
         <div>
-          {/* Routes */}
           <Routes>
             <Route path='/' element={<Login />} />
             <Route path='home' element={<ProtectedRoute> <Home /> </ProtectedRoute>} />

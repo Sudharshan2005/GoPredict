@@ -73,7 +73,7 @@ export function PredictionForm4() {
 
   return (
     <>
-      <div className="h-[135vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
+      <div className="h-[100vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
         <div className='p-5'>
           <NavigationbarWithDropdownMultilevelMenu />
           <div className='flex justify-center items-center mt-20'>
