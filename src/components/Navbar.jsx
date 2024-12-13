@@ -38,6 +38,7 @@ const nestedMenuItems = [
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const navigate = useNavigate()
 
   return (
     <React.Fragment>
@@ -67,10 +68,8 @@ function NavListMenu() {
           </Typography>
         </MenuHandler>
         <MenuList className="hidden rounded-xl lg:block">
-          <MenuItem>
-            <a href="https://www.iplt20.com/teams" target="_blank" rel="noopener noreferrer">
-              Teams
-            </a>
+          <MenuItem onClick={() => navigate('/teams-page')}>
+          <a onClick={() => navigate('/teams-page')}>Teams</a>
           </MenuItem>
           <MenuItem>
             <a href="https://www.iplt20.com/matches/results" target="_blank" rel="noopener noreferrer">Matches</a>
@@ -82,10 +81,8 @@ function NavListMenu() {
       </Menu>
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>
-          <MenuItem>
-            <a href="https://www.iplt20.com/teams" target="_blank" rel="noopener noreferrer">
-              Teams
-            </a>
+        <MenuItem onClick={() => navigate('/teams-page')}>
+          Teams
           </MenuItem>
           <MenuItem>
             <a href="https://www.iplt20.com/matches/results" target="_blank" rel="noopener noreferrer">Matches</a>

@@ -9,6 +9,7 @@ import { PredictionForm1 } from './components/pages/PredictionForm1';
 import { PredictionForm2 } from './components/pages/PredictionForm2';
 import { PredictionForm3 } from './components/pages/PredictionForm3';
 import { PredictionForm4 } from './components/pages/PredictionForm4';
+import { TeamsPage } from './components/pages/TeamsPage';
 
 import { ProtectedRoute } from './components/ProtectedRoute';
 
@@ -25,6 +26,7 @@ function App() {
             <Route path='predict-page/prediction-form2' element={<ProtectedRoute><PredictionForm2 /></ProtectedRoute>} />
             <Route path='predict-page/prediction-form3'  element={<ProtectedRoute><PredictionForm3 /></ProtectedRoute>} />
             <Route path='predict-page/prediction-form4' element={<ProtectedRoute><PredictionForm4 /></ProtectedRoute>} />
+            <Route path='teams-page' element={<ProtectedRoute><TeamsPage /></ProtectedRoute>} />
           </Routes>
         </div>
       </div>
