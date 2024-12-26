@@ -19,7 +19,7 @@ const __dirname = new URL('.', import.meta.url).pathname;
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 const mongoURI = process.env.MONGO_URI;
-const jwtSecret = process.env.JWT_SECRET || 'your_jwt_secret'; // Store this in your .env file
+const jwtSecret = process.env.JWT_SECRET; // Store this in your .env file
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -36,6 +36,49 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+const playerSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  team: {
+    type: String,
+    required: true,
+  },
+  quote: {
+    type: String,
+    required: true,
+  },
+  designation: {
+    type: String,
+    required: true,
+  },
+  src: {
+    type: String,
+    required: true,
+  }
+}, { timestamps: true });
+
+const Player = mongoose.model("players", playerSchema); // Ensure "players" collection is correctly named
+
+console.log(Player);
+
+
+app.get("/teams-page", async (req, res) => {
+  const { team } = req.query;  // Get the team from query parameters
+  try {
+    const players = team 
+      ? await Player.find({ team })  // Filter by the selected team
+      : await Player.find();  // Return all players if no team is specified
+    res.json(players);  // Send the player data as JSON response
+    console.log(players);
+  } catch {
+    res.status(500).json({ error: "Error fetching player data" });
+  }
+});
+
+
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);

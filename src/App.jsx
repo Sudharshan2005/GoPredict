@@ -10,6 +10,7 @@ import { PredictionForm2 } from './components/pages/PredictionForm2';
 import { PredictionForm3 } from './components/pages/PredictionForm3';
 import { PredictionForm4 } from './components/pages/PredictionForm4';
 import { TeamsPage } from './components/pages/TeamsPage';
+// import { TeamsPage2 } from './components/pages/TeamsPage2';
 
 import { ProtectedRoute } from './components/ProtectedRoute';
 
@@ -27,6 +28,7 @@ function App() {
             <Route path='predict-page/prediction-form3'  element={<ProtectedRoute><PredictionForm3 /></ProtectedRoute>} />
             <Route path='predict-page/prediction-form4' element={<ProtectedRoute><PredictionForm4 /></ProtectedRoute>} />
             <Route path='teams-page' element={<ProtectedRoute><TeamsPage /></ProtectedRoute>} />
+            {/* <Route path='teams-page' element={<ProtectedRoute><TeamsPage2 /></ProtectedRoute>} /> */}
           </Routes>
         </div>
       </div>

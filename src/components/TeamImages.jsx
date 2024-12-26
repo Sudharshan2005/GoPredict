@@ -49,11 +49,10 @@ export function AnimatedTestimonialsBatters() {
       team: "Chennai Super Kings (CSK)",
       quote: "A young and promising talent, eager to make an impact in the IPL. Details will emerge as he gains more experience in the tournament.",
       designation: "Upcoming Player",
-      src: "https://example.com/placeholder-image.jpg", // Placeholder image URL
+      src: "https://example.com/placeholder-image.jpg",
     }
   ];
 
-  // Function to render the quote with line breaks
   const renderQuoteWithBreaks = (quote) => {
     return quote.split("\n").map((line, index) => (
       <p key={index}>{line}</p>

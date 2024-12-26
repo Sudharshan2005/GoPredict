@@ -20,7 +20,7 @@ const TypeWriterPredict = () => {
         <p className="text-neutral-600 text-white dark:text-neutral-200 text-base  mb-0">
         Predict. Play. Win: Your Cricket Insights Simplified!
         </p>
-        <TypewriterEffect 
+        <TypewriterEffect
           words={words} 
         />
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4 mt-10">
