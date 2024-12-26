@@ -58,7 +58,7 @@ export function SimpleFooter() {
                     <AvatarImage src={link.avatarSrc} />
                     <AvatarFallback>{link.label.charAt(0)}</AvatarFallback>
                   </Avatar>
-                  <div className="space-y-1">
+                  <div className="space-y-1 text-left">
                     <h4 className="text-sm font-semibold">{link.label}</h4>
                     <p className="text-sm">{link.description}</p>
                     <div className="flex items-center pt-2">
