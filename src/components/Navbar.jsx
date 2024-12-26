@@ -74,8 +74,8 @@ function NavListMenu() {
           <MenuItem>
             <a href="https://www.iplt20.com/matches/results" target="_blank" rel="noopener noreferrer">Matches</a>
           </MenuItem>
-          <MenuItem>
-            <a href="https://www.iplt20.com/matches/points-table" target="_blank" rel="noopener noreferrer">Table</a>
+          <MenuItem onClick={() => navigate('/table-page')}>
+            Table
           </MenuItem>
         </MenuList>
       </Menu>
@@ -87,8 +87,8 @@ function NavListMenu() {
           <MenuItem>
             <a href="https://www.iplt20.com/matches/results" target="_blank" rel="noopener noreferrer">Matches</a>
           </MenuItem>
-          <MenuItem>
-            <a href="https://www.iplt20.com/matches/points-table" target="_blank" rel="noopener noreferrer">Table</a>
+          <MenuItem onClick={() => navigate('/table-page')}>
+            Table
           </MenuItem>
         </Collapse>
       </div>

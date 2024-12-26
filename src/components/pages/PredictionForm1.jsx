@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { NavigationbarWithDropdownMultilevelMenu } from "../Navbar";
 import { Card, Select, Option, Typography, Button } from '@material-tailwind/react';
@@ -147,7 +147,7 @@ export function PredictionForm1() {
                   </Select>
                 </div>
               </form>
-              <div className="mt-5 text-center flex flex-col justify-center items-center">
+              <div className="mt-5 text-center flex flex-row justify-around items-center">
                 <Button className="normal-case font-bold" onClick={handleSubmit}>GoPredict</Button>
               </div>
             </Card>
