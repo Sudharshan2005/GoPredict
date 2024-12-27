@@ -5,23 +5,34 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 export const AnimatedTestimonials = ({ testimonials }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  };
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0
+        ? 1
+        : (prevIndex + 1) % testimonials.length
     );
   };
 
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex === 0) return testimonials.length - 1; // Wrap around to the last index
+      return prevIndex === 1 
+        ? 0
+        : prevIndex - 1;
+    });
+  };
+
   const renderQuote = (quote) => {
-    return quote.split('\n').map((line, index) => <p key={index} className="text-xl italic text-gray-600">{line}</p>);
+    return quote.split('\n').map((line, index) => (
+      <p key={index} className="text-xl italic text-gray-600">{line}</p>
+    ));
   };
 
   return (
     <div className="w-full max-w-6xl mx-auto py-12 px-6">
       <div className="flex flex-col md:flex-row gap-8 items-start">
+        {/* Left Section: Testimonial Image */}
         <div className="w-full h-96 md:w-1/2 flex justify-end items-center">
           <motion.img
             key={currentIndex}

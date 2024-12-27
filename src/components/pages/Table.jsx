@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavigationbarWithDropdownMultilevelMenu } from "../Navbar";
 import { Select, Option } from "@material-tailwind/react";
 import { SimpleFooter } from "../Footer";
+import { SpinLoader } from "../Loading";
 
 export function Table() {
-    const [selectedYear, setSelectedYear] = useState("2023"); // Default year
-    const [open, setOpen] = useState(false); // Manage dropdown state
+    const [selectedYear, setSelectedYear] = useState("2024");
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [imageSrc, setImageSrc] = useState("");
+
     const tables = [
         { year: "2008", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2008.png" },
         { year: "2009", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2009.png" },
@@ -28,14 +32,29 @@ export function Table() {
 
     const handleYearChange = (value) => {
         setSelectedYear(value);
-        setOpen(false);
+        setLoading(true); // Set loading to true when changing year
     };
+
+    useEffect(() => {
+        const selectedTable = tables.find((table) => table.year === selectedYear);
+        if (selectedTable) {
+            setImageSrc(selectedTable.src); // Update the image source based on the selected year
+        }
+    }, [selectedYear]);
+
+    useEffect(() => {
+        if (imageSrc) {
+            const img = new Image();
+            img.src = imageSrc;
+            img.onload = () => {
+                setLoading(false); // Set loading to false once image is loaded
+            };
+        }
+    }, [imageSrc]);
 
     const toggleDropdown = () => {
         setOpen(!open);
     };
-
-    const selectedTable = tables.find((table) => table.year === selectedYear);
 
     return (
         <>
@@ -57,21 +76,28 @@ export function Table() {
                                     className="rounded-lg bg-blue-gray-700 text-blue-gray-300 focus:outline-none"
                                 >
                                     {tables.map((table) => (
-                                        <Option key={table.year} value={table.year}>
+                                        <Option className="mb-2" key={table.year} value={table.year}>
                                             {table.year}
                                         </Option>
                                     ))}
                                 </Select>
                             </div>
                         </div>
-                        {selectedTable && (
-                            <div className="mt-14">
-                                <img
-                                    src={selectedTable.src}
-                                    alt={`Table for ${selectedTable.year}`}
-                                    className="mx-auto max-w-6xl rounded-lg shadow-lg"
-                                />
+
+                        {loading ? (
+                            <div className="mt-14 flex justify-center items-center">
+                                <SpinLoader />
                             </div>
+                        ) : (
+                            imageSrc && (
+                                <div className="mt-14">
+                                    <img
+                                        src={imageSrc}
+                                        alt={`Table for ${selectedYear}`}
+                                        className="mx-auto max-w-6xl rounded-lg shadow-lg"
+                                    />
+                                </div>
+                            )
                         )}
                     </div>
                 </div>

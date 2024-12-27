@@ -37,48 +37,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const playerSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  team: {
-    type: String,
-    required: true,
-  },
-  quote: {
-    type: String,
-    required: true,
-  },
-  designation: {
-    type: String,
-    required: true,
-  },
-  src: {
-    type: String,
-    required: true,
-  }
-}, { timestamps: true });
-
-const Player = mongoose.model("players", playerSchema); // Ensure "players" collection is correctly named
-
-console.log(Player);
-
-
-app.get("/teams-page", async (req, res) => {
-  const { team } = req.query;  // Get the team from query parameters
-  try {
-    const players = team 
-      ? await Player.find({ team })  // Filter by the selected team
-      : await Player.find();  // Return all players if no team is specified
-    res.json(players);  // Send the player data as JSON response
-    console.log(players);
-  } catch {
-    res.status(500).json({ error: "Error fetching player data" });
-  }
-});
-
-
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
@@ -173,13 +131,34 @@ const protect = (req, res, next) => {
       const decoded = jwt.verify(token, jwtSecret);
       req.user = decoded.id;
       next();
-    } catch (error) {
+    } catch  {
       res.status(401).json({ message: 'Not authorized, token failed' });
     }
   } else {
     res.status(401).json({ message: 'Not authorized, no token' });
   }
 };
+
+const teamsSchema = new mongoose.Schema({
+  team_name: String,
+  data: {
+    color: String,
+    batters: Array,
+    allRounders: Array,
+    bowlers: Array,
+  },
+});
+
+const Teams = mongoose.model('players', teamsSchema);
+
+app.get('/players', async (req, res) => {
+  try {
+    const data = await Teams.find();
+    res.json(data);
+  } catch {
+    res.status(500).json({ error: 'Failed to fetch items' });
+  }
+});
 
 mongoose
   .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })

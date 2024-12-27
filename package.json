@@ -40,6 +40,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
     "require": "^2.4.20",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.5",
     "shadcn-ui": "^0.9.3",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
