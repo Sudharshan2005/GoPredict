@@ -10,47 +10,41 @@ export function Table() {
     const [loading, setLoading] = useState(false);
     const [imageSrc, setImageSrc] = useState("");
 
-    const tables = [
-        { year: "2008", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2008.png" },
-        { year: "2009", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2009.png" },
-        { year: "2010", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2010.png" },
-        { year: "2011", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2011.png" },
-        { year: "2012", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2012.png" },
-        { year: "2013", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2013.png" },
-        { year: "2014", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2014.png" },
-        { year: "2015", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2015.png" },
-        { year: "2016", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2016.png" },
-        { year: "2017", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2017.png" },
-        { year: "2018", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2018.png" },
-        { year: "2019", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2019.png" },
-        { year: "2020", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2020.png" },
-        { year: "2021", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2021.png" },
-        { year: "2022", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2022.png" },
-        { year: "2023", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2023.png" },
-        { year: "2024", src: "https://gopredict.s3.us-east-1.amazonaws.com/Tables/2024.png" }
-    ];
+    const [tables, setTables] = useState([]);
+
+    useEffect(() => {
+        setLoading(true);
+        fetch("http://localhost:5001/api/tables")
+            .then((response) => response.json())
+            .then((data) => {
+                setTables(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching tables:", error);
+                setLoading(false);
+            });
+    }, []);
+
+    const years = ["2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008"];
 
     const handleYearChange = (value) => {
-        setSelectedYear(value);
-        setLoading(true); // Set loading to true when changing year
+        if (value !== selectedYear) {
+            setSelectedYear(value);
+            setLoading(true);
+        }
     };
 
     useEffect(() => {
         const selectedTable = tables.find((table) => table.year === selectedYear);
         if (selectedTable) {
-            setImageSrc(selectedTable.src); // Update the image source based on the selected year
+            setImageSrc(selectedTable.src);
+            setLoading(false);
+        } else {
+            setImageSrc("");
+            setLoading(false);
         }
-    }, [selectedYear]);
-
-    useEffect(() => {
-        if (imageSrc) {
-            const img = new Image();
-            img.src = imageSrc;
-            img.onload = () => {
-                setLoading(false); // Set loading to false once image is loaded
-            };
-        }
-    }, [imageSrc]);
+    }, [selectedYear, tables]);
 
     const toggleDropdown = () => {
         setOpen(!open);
@@ -75,9 +69,9 @@ export function Table() {
                                     onChange={handleYearChange}
                                     className="rounded-lg bg-blue-gray-700 text-blue-gray-300 focus:outline-none"
                                 >
-                                    {tables.map((table) => (
-                                        <Option className="mb-2" key={table.year} value={table.year}>
-                                            {table.year}
+                                    {years.map((year) => (
+                                        <Option className="mb-2" key={year} value={year}>
+                                            {year}
                                         </Option>
                                     ))}
                                 </Select>
@@ -89,7 +83,7 @@ export function Table() {
                                 <SpinLoader />
                             </div>
                         ) : (
-                            imageSrc && (
+                            imageSrc ? (
                                 <div className="mt-14">
                                     <img
                                         src={imageSrc}
@@ -97,6 +91,8 @@ export function Table() {
                                         className="mx-auto max-w-6xl rounded-lg shadow-lg"
                                     />
                                 </div>
+                            ) : (
+                                <p className="text-lg text-blue-gray-300 mt-6">No data available for this year.</p>
                             )
                         )}
                     </div>

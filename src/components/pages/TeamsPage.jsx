@@ -3,11 +3,13 @@ import { NavigationbarWithDropdownMultilevelMenu } from "../Navbar";
 import { SimpleFooter } from "../Footer";
 import { TeamLogos } from "../TeamSelection";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { SpinLoader } from "../Loading";
 
 export function TeamsPage() {
   const [selectedTeam, setSelectedTeam] = useState("Chennai Super Kings");
   const [playerData, setPlayerData] = useState({});
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleTeamSelection = (teamName) => {
     setSelectedTeam(teamName);
@@ -15,6 +17,7 @@ export function TeamsPage() {
 
   useEffect(() => {
     const fetchPlayers = async () => {
+      setLoading(true);
       try {
         const response = await fetch('http://localhost:5001/players');
         if (!response.ok) {
@@ -34,6 +37,8 @@ export function TeamsPage() {
         setPlayerData(cleanedData);
       } catch (error) {
         setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -56,30 +61,38 @@ export function TeamsPage() {
                 {selectedTeam}
               </h1>
             </div>
-            <div className="mt-10">
-              <h1 className="text-4xl ml-20 text-blue-gray-600 font-bold">Batters:</h1>
-              {batters.length > 0 ? (
-                <AnimatedTestimonials testimonials={batters} />
-              ) : (
-                <p>No batters available.</p>
-              )}
-            </div>
-            <div className="mt-14">
-              <h1 className="text-4xl ml-20 text-blue-gray-600 font-bold">All-rounders:</h1>
-              {allRounders.length > 0 ? (
-                <AnimatedTestimonials testimonials={allRounders} />
-              ) : (
-                <p>No all-rounders available.</p>
-              )}
-            </div>
-            <div className="mt-14">
-              <h1 className="text-4xl ml-20 text-blue-gray-600 font-bold">Bowlers:</h1>
-              {bowlers.length > 0 ? (
-                <AnimatedTestimonials testimonials={bowlers} />
-              ) : (
-                <p>No bowlers available.</p>
-              )}
-            </div>
+            {loading ? (
+              <div className="mt-10 flex justify-center items-center">
+                <SpinLoader />
+              </div>
+            ) : (
+              <>
+                <div className="mt-10">
+                  <h1 className="text-4xl ml-20 text-blue-gray-600 font-bold">Batters:</h1>
+                  {batters.length > 0 ? (
+                    <AnimatedTestimonials testimonials={batters} />
+                  ) : (
+                    <p>No batters available.</p>
+                  )}
+                </div>
+                <div className="mt-14">
+                  <h1 className="text-4xl ml-20 text-blue-gray-600 font-bold">All-rounders:</h1>
+                  {allRounders.length > 0 ? (
+                    <AnimatedTestimonials testimonials={allRounders} />
+                  ) : (
+                    <p>No all-rounders available.</p>
+                  )}
+                </div>
+                <div className="mt-14">
+                  <h1 className="text-4xl ml-20 text-blue-gray-600 font-bold">Bowlers:</h1>
+                  {bowlers.length > 0 ? (
+                    <AnimatedTestimonials testimonials={bowlers} />
+                  ) : (
+                    <p>No bowlers available.</p>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -89,4 +102,3 @@ export function TeamsPage() {
     </>
   );
 }
-

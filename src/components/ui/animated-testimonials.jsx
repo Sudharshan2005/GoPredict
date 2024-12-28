@@ -50,10 +50,10 @@ export const AnimatedTestimonials = ({ testimonials }) => {
         <div className="w-full mt-10 md:w-1/2">
           {/* Heading and Tagline */}
           <div className="mb-4">
-            <h2 className="text-3xl font-semibold text-gray-800">
+            <h2 className="text-3xl font-semibold text-white">
               {testimonials[currentIndex].name}
             </h2>
-            <p className="text-sm text-gray-500 uppercase">
+            <p className="text-sm text-gray-400 uppercase">
               {testimonials[currentIndex].team}
             </p>
           </div>

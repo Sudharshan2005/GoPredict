@@ -27,8 +27,8 @@ const TypeWriterPredict = () => {
         <Button onClick={() => navigate('/predict-page')} className="w-40 h-10">
           Go Predict
         </Button>
-        <Button className="w-40 h-10 bg-white text-black">
-          <a href="https://www.iplt20.com/" target="_blank" rel="noopener noreferrer">Explore</a>
+        <Button onClick={() => navigate('/teams-page')} className="w-40 h-10 bg-white text-black">
+          Explore
         </Button>
       </div>
   
