@@ -52,7 +52,7 @@ export function Table() {
 
     return (
         <>
-            <div className="h-[112vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
+            <div className="min-h-[100vh] max-h-[113vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
                 <div className="p-5">
                     <NavigationbarWithDropdownMultilevelMenu />
                     <div className="text-center mt-14">

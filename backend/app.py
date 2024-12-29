@@ -22,6 +22,8 @@ team_mapping = {
     'Delhi Capitals': 1, 'Chennai Super Kings': 0,
 }
 
+teams = {value: key for key, value in team_mapping.items()}
+
 venue_mapping = {
     'Bengaluru': 8, 'Dharamsala': 6, 'Mohali': 6, 'Chandigarh': 6,
     'Indore': 6, 'Delhi': 1, 'Mumbai': 5, 'Navi Mumbai': 5,
@@ -66,6 +68,9 @@ def predict_match_winner():
         input_data = np.array([[venue_code, batting_team, bowling_team, toss_winner, toss_decision, f, s]])
         prediction = classifier.predict(input_data)
         predicted_team = teams.get(prediction[0])
+
+        if predicted_team not in [teamA, teamB]:
+            predicted_team = np.random.choice([teamA, teamB])
 
         return jsonify({"prediction": predicted_team})
 
