@@ -1,26 +1,25 @@
+/* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 
 export const AnimatedTestimonials = ({ testimonials }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [testimonials]);
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0
-        ? 1
-        : (prevIndex + 1) % testimonials.length
+    setCurrentIndex((prevIndex) =>
+      (prevIndex + 1) % testimonials.length
     );
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => {
-      if (prevIndex === 0) return testimonials.length - 1; // Wrap around to the last index
-      return prevIndex === 1 
-        ? 0
-        : prevIndex - 1;
-    });
+    setCurrentIndex((prevIndex) => 
+      (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1)
+    );
   };
 
   const renderQuote = (quote) => {
@@ -32,7 +31,6 @@ export const AnimatedTestimonials = ({ testimonials }) => {
   return (
     <div className="w-full max-w-6xl mx-auto py-12 px-6">
       <div className="flex flex-col md:flex-row gap-8 items-start">
-        {/* Left Section: Testimonial Image */}
         <div className="w-full h-96 md:w-1/2 flex justify-end items-center">
           <motion.img
             key={currentIndex}
@@ -46,9 +44,7 @@ export const AnimatedTestimonials = ({ testimonials }) => {
           />
         </div>
 
-        {/* Right Section: Testimonial Content */}
         <div className="w-full mt-10 md:w-1/2">
-          {/* Heading and Tagline */}
           <div className="mb-4">
             <h2 className="text-3xl font-semibold text-white">
               {testimonials[currentIndex].name}
@@ -65,11 +61,9 @@ export const AnimatedTestimonials = ({ testimonials }) => {
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Rendering the quote with each line in a new <p> */}
             {renderQuote(testimonials[currentIndex].quote)}
           </motion.div>
 
-          {/* Arrows Section */}
           <div className="flex justify-start gap-4 mt-6">
             <button
               onClick={handlePrev}

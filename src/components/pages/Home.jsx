@@ -5,7 +5,7 @@ import TypeWriterPredict from '../TypeWriter';
 
 export function Home() {
   return (
-    <div className="h-[165vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
+    <div className="h-[163vh] w-full bg-gradient-to-b from-black to-blue-gray-900">
       <header className="p-5">
         <NavigationbarWithDropdownMultilevelMenu />
       </header>

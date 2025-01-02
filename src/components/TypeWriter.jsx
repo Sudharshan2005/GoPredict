@@ -12,7 +12,8 @@ const TypeWriterPredict = () => {
       { text: "Predict ", className: "text-white" },
       { text: "Your ", className: "text-white" },
       { text: "Cricket ", className: "text-white" },
-      { text: "Matches...", className: "text-white" },
+      { text: "Matches", className: "text-white" },
+      {text: "...", className: "text-blue-gray-400"}
     ];
   
     return (

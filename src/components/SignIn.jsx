@@ -3,6 +3,7 @@ import axios from "axios";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 
 
+// eslint-disable-next-line react/prop-types
 export function SimpleRegistrationFormSignIn({ setIsSignup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,7 +66,7 @@ export function SimpleRegistrationFormSignIn({ setIsSignup }) {
           <Input
             type="password"
             size="lg"
-            placeholder="********"
+            placeholder="password"
             className="!border-white focus:!border-white text-white"
             labelProps={{
               className: "before:content-none after:content-none",

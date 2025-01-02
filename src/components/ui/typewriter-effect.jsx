@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -9,7 +10,6 @@ export const TypewriterEffect = ({
   className,
   cursorClassName
 }) => {
-  // split text inside of words into array of characters
   const wordsArray = words.map((word) => {
     return {
       ...word,
@@ -73,7 +73,7 @@ export const TypewriterEffect = ({
           repeatType: "reverse",
         }}
         className={cn(
-          "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-blue-500",
+          "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-blue-gray-300",
           cursorClassName
         )}></motion.span>
     </div>)
@@ -85,7 +85,6 @@ export const TypewriterEffectSmooth = ({
   className,
   cursorClassName
 }) => {
-  // split text inside of words into array of characters
   const wordsArray = words.map((word) => {
     return {
       ...word,

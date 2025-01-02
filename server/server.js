@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import express from 'express';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
@@ -17,8 +18,9 @@ app.use(cors());
 
 const __dirname = new URL('.', import.meta.url).pathname;
 
+ 
 const mongoURI = process.env.MONGO_URI;
-const jwtSecret = process.env.JWT_SECRET; // Store this in your .env file
+const jwtSecret = process.env.JWT_SECRET;
 
 const client = new MongoClient(mongoURI);
 let database;
@@ -30,7 +32,7 @@ async function connectToMongoDB() {
     console.log('Connected to MongoDB!');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
-    process.exit(1); // Exit the process if connection fails
+    process.exit(1);
   }
 }
 
@@ -141,12 +143,12 @@ app.get('/players', async (req, res) => {
   }
 });
 
-const tablesSchema = new mongoose.Schema({
-  year: String,
-  src: String,
-});
+// const tablesSchema = new mongoose.Schema({
+//   year: String,
+//   src: String,
+// });
 
-const Tables = mongoose.model('tables', tablesSchema);
+// const Tables = mongoose.model('tables', tablesSchema);
 
 app.get('/api/tables', async (req, res) => {
   try {
